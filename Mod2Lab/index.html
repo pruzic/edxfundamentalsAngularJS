@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
     <title>Tony's Pizza</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-        crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+
 </head>
 
-<body>
+<body ng-controller="menuController">
+
     <div class="container">
-        <h1>Tony's Pizza</h1>
+        <h1>Predrag's Pizza</h1>
+        <h2>{{model.title}}</h2>
+
+        <hr>
+        <div>
+            <label><input type="radio" name="category" ng-click="changeMainDish('Cheese Pizza')"/> Cheese Pizza </label>
+        </div>
+        <div>
+            <label><input type="radio" name="category" ng-click="changeMainDish('Pepperoni Pizza')" /> Pepperoni Pizza </label>
+        </div>
+        <div>
+            <label><input type="radio" name="category" ng-click="changeMainDish('Margherita Pizza')" /> Margherita Pizza </label>
+        </div>
+        <div>
+            <label><input type="radio" name="category" ng-click="changeMainDish('BBQ Chicken Pizza')" /> BBQ Chicken Pizza </label>
+        </div>
+        <div>
+            <label><input type="radio" name="category" ng-click="changeMainDish('Combo Pizza')" /> Combo Pizza </label>
+        </div>
+
+        <hr>
+        <div>
+            <h3>Selected Item</h3>
+            <pre>{{model.mainDish.name}}</pre>
+        </div>
+        <div>
+            <h3>Special Instructions</h3>
+            <textarea class="form-control" ng-model="model.specialInstructions"></textarea>
+        </div>
+        <div>
+            <h3>Order Summary</h3>
+            <pre>{{model.mainDish.name}} {{model.mainDish.price}} - {{model.specialInstructions}}
+        </div>
     </div>
+
+    <script src="src/app.js"></script>
+    <script src="src/menuController.js"></script>
+
 </body>
 
 </html>
