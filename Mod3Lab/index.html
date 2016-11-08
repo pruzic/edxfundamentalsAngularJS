@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Tony's Pizza</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+
+</head>
+
+<body ng-controller="pizzaController">
+    <div class="container">
+        <h1>Tony's Pizza</h1>
+
+        <h2>{{model.title}}</h2>
+        <hr>
+        <div>
+            <h3>Topping Search</h3>
+            <input type="text" class="form-control" ng-model="model.search" ng-keyup="searchedToppingFound()">
+        </div>
+        </br>
+        </br>
+        <!--<div ng-hide="!model.search">
+            Test-->
+        <div ng-show="model.toppingAdded" class="alert-success">
+            Topping Added. <button type="button" ng-click="model.toppingAdded = false;">Close</button>
+        </div>
+
+        <div ng-show="model.toppingFound === 0 && model.search.length > 0" class="alert-danger">
+            No Results
+        </div>
+
+        <!--</div>-->
+
+        <div ng-hide="model.search">
+            Enter the seach criteria above.
+        </div>
+        <div ng-show="model.search" ng-repeat="t in model.availableToppings | filter:model.search">
+            <span ng-click="addTopping(t)"> {{t}}</span>
+        </div>
+        <h3 ng-show="model.toppingAdded">Selected Toppings</h3>
+        <div ng-repeat="s in model.toppings">
+            {{s}}
+        </div>
+
+    </div>
+
+    <script src="app/app.js"></script>
+    <script src="app/pizzaController.js"></script>
+</body>
+
+</html>
