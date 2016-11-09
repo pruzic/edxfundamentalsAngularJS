@@ -2,13 +2,14 @@
 <html ng-app="app">
 
 <head>
-    <title>Tony's Pizza</title>
+    <title>HTTP and Resources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
+
     <script src="./lib/angular.min.js"></script>
     <script src="./lib/angular-ui-router.min.js"></script>
-
+    <script src="./lib/angular-resource.min.js"></script>
 </head>
 
 <body ng-controller="labController">
@@ -31,10 +32,13 @@
                 <pre>{{model.result}}</pre>
             </div>
         </div>
-
+        <hr>
         <div class="row top-buffer">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <input type="button" class="btn btn-primary" value="Load Repos" ng-click="getRepos()" ng-hide="model.repos" />
+                <input type="text" class="form-control" ng-model="model.org" />
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <input type="button" class="btn btn-primary" value="Load Repos" ng-click="getRepos(model.org)" ng-hide="model.repos" />
             </div>
         </div>
 
@@ -45,15 +49,43 @@
                         <th>Name</th>
                         <th>Language</th>
                     </tr>
-                    <tr ng-repeat="r in model.repos">
+                    <tr ng-repeat="r in model.repos | filter: model.org">
                         <td>
                             <h4>{{r.name}}</h4> {{r.description}}
                         </td>
                         <td>
                             {{r.language}}
                         </td>
+                        <td><input type="button" class="btn btn-success" ng-click="loadDetail(r.name)" value="Detail"></td>
                     </tr>
                 </table>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="model.detail">
+                <div class="jumbotron">
+                    <h3>Detail</h3>
+                    <div ng-show="model.detail.error" class="alert alert-danger">
+                        <h3>Error</h3>
+                        {{model.detail.message}}
+                    </div>
+                    <div>
+                        <h4>Name</h4>
+                        {{model.detail.name}}
+                    </div>
+                    <div>
+                        <h4>Description</h4>
+                        {{model.detail.description}}
+                    </div>
+                    <div>
+                        <h4>URL</h4>
+                        <a ng-href="{{model.detail.html_url}}" target="_blank">
+                            {{model.detail.html_url}}</a>
+                    </div>
+                    <div>
+                        <h4>Raw Data</h4>
+                        <pre> {{model.detail | json}}</pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -61,6 +93,7 @@
 
     </div>
 
+    <script src="./app/gitHubService.js"></script>
     <script src="./app/app.js"></script>
     <script src="./app/labController.js"></script>
 </body>
