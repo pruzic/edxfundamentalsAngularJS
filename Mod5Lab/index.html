@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Tony's Pizza - New User Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <script src="./lib/angular.min.js"></script>
+    <script src="./lib/angular-ui-router.min.js"></script>
+    <script src="./lib/angular-resource.min.js"></script>
+
+</head>
+
+<body ng-controller="labController">
+    <div class="container">
+        <h1>New User Registration</h1>
+        <hr>
+        <form class="form-horizontal" name="form" novalidate>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>User Name:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="userName" class="form-control" ng-model="model.userName" required>
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.userName.$touched || form.submitted) && form.userName.$error.required">
+                    User name is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Password:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="password" name="password" class="form-control" ng-model="model.password" required>
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.password.$touched || form.submitted) && form.password.$error.required">
+                    Password is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Name:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="name" class="form-control" ng-model="model.name" required>
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.name.$touched || form.submitted) && form.name.$error.required">
+                    Name is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Phone Number:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="number" name="phone" class="form-control" ng-model="model.phone" ng-required="true">
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.phone.$touched || form.submitted) && form.phone.$error.required">
+                    Phone is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Email Address:</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="email" name="emailAddress" class="form-control" ng-model="model.emailAddress" ng-required="true">
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.emailAddress.$touched || form.submitted) && form.emailAddress.$error.required">
+                    Email is required!
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Favorite Pizza:</label>
+                </div>
+                <div class="col-md-5">
+                    <select name="favorite" class="form-control" ng-model="model.favorite" ng-required="true">
+                        <option>Cheese Pizza</option>
+                        <option>Pepperoni Pizza</option>
+                        <option>Margherita Pizza</option>
+                        <option>BBQ Chicken Pizza</option>
+                        <option>Combo Pizza</option>
+                    </select>
+                </div>
+                <div class="col-md-2 alert alert-danger" ng-show="(form.favorite.$touched || form.submitted) && form.favorite.$error.required">
+                    Favorite is required!
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Comments:</label>
+                </div>
+                <div class="col-md-5">
+                    <textarea name="comment" class="form-control" ng-model="model.comment"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Submit" class="btn btn-primary" ng-click="submit(model)" ng-disabled="form.$invalid" />
+                    <button class="btn btn-default" ng-click="reset()">Reset</button>
+                </div>
+            </div>
+        </form>
+
+        <pre ng-show="model.userName != undefined">{{model | json}}</pre>
+    </div>
+
+    <script src="./scripts/registrationService.js"></script>
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/labController.js"></script>
+
+</body>
+
+</html>
